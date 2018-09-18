@@ -1,5 +1,5 @@
 #! python3
-import os, sys, math
+import os, sys, math, random
 from beatinc import *
 from beatio import *
  
@@ -24,13 +24,13 @@ def RNDNormal(center, sigma) :
 #var u1,u2,v1,v2,s : real;
 
     while True :
-        u1 = random(5)    # The argument of random0() is irrelevant
-        u2 = random(5)
+        u1 = random.random()
+        u2 = random.random()
         v1 = 2*u1-1       # Shift distribution from 0 .. +1  to  -1 .. +1
         v2 = 2*u2-1
         s = v1*v1 + v2*v2
         if s < 1: break
-    RNDNormal = v1 * math.sqrt((-2)*ln(s)/s) * sigma + center
+    RNDNormal = v1 * math.sqrt((-2)*math.log(s)/s) * sigma + center
     return RNDNormal
 #end RNDNormal
 
@@ -90,7 +90,7 @@ def PropConst(LowCap, UpCap1, UpCap2, FringeCap1, FringeCap2) :
 
     Cap = LowCap + FringeCap1 + FringeCap2 + UpCap1 + UpCap2
     VelSub = 1/(1 + ((FringeCap1 + FringeCap2)*(DiConst/EffDiConst - 1) + (UpCap1 + UpCap2)*(sqrt(DiConst) - 1))/Cap)
-    VelConst = 1/sqrt(1 + sqr(VelSub)*(DiConst -1))
+    VelConst = 1/math.sqrt(1 + sqr(VelSub)*(DiConst -1))
     IntProp = 1/(SpeedOfLight * VelConst) * 1e9
     return IntProp
 #end PropConst 
@@ -114,8 +114,8 @@ def LineCap(LowCap, UpCap) :
 
     CommonTerm = DiConst / (SpeedOfLight * ImpedOfFreeSpace)
     LowCap = CommonTerm * TraceWidth / TraceHeight * 1e12
-    UpCap = 2/6 * (LowCap/sqrt(DiConst))
-    FringeCap = CommonTerm*(EffDiConst/DiConst) * pi / ln(4*TraceHeight/TraceThick) * 1e12
+    UpCap = 2/6 * (LowCap/math.sqrt(DiConst))
+    FringeCap = CommonTerm*(EffDiConst/DiConst) * pi / math.log(4*TraceHeight/TraceThick) * 1e12
     return FringeCap
 #end LinCap
 
@@ -160,7 +160,7 @@ def OddLineCap(OddUpCap) :
     CommonTerm =DiConst / (SpeedOfLight * ImpedOfFreeSpace)
     OddCoupConst = 1 / ((TraceSpacing / TraceWidth) + 1)
     OddUpCap = 8/6 * ((CommonTerm * OddCoupConst)/sqrt(DiConst)) * 1e12
-    OddFringeDenom = ln(4*TraceSpacing * tanh(4*TraceHeight/TraceSpacing) / (pi*TraceThick))
+    OddFringeDenom = math.log(4*TraceSpacing * tanh(4*TraceHeight/TraceSpacing) / (pi*TraceThick))
     OddFringeCap = (CommonTerm*(EffDiConst/DiConst)*pi/OddFringeDenom)*1e12
     return OddFringeCap
 #end OddLineCap

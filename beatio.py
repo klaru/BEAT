@@ -12,7 +12,9 @@ from beatinc import *
 #procedure LineAnalStatOut(EffImpedMean,EffImpedSigma,EffPropMean,
 #	EffPropSigma,IntCapMean,IntCapSigma,IntInductMean,
 #	IntInductSigma,IntResMean,IntResSigma: real);
-#procedure LoadParameters;
+#procedure LoadParameters
+#procedure menu(NumOpt : integer; Header : str; OptArray : strgarray; var SelOpt : opt);
+
 
 #****************************************************************************
 def GetParam(question, UnitSel, number) :
@@ -26,9 +28,8 @@ def GetParam(question, UnitSel, number) :
 #end GetParam 
 
 #****************************************************************************
-def GetIParam (question) :
+def GetIParam (question, number) :
 #****************************************************************************
-
 
    print(question,'[%6i] ' %(number), end='')				
    string = input()
@@ -38,11 +39,11 @@ def GetIParam (question) :
 #end GetIParam
 
 #****************************************************************************
-def GetResponse (question) :
+def GetResponse (question, yn) :
 #****************************************************************************
 
-    Query = ''
-    print (question, '[n] ', end='')
+    Query = yn
+    print (question, '[',yn,'] ', end='')
     while True :
         string = input()
         if ((string == 'y') 
@@ -109,43 +110,108 @@ def GetTraceParamConst() :
 #end GetTraceParamConst
 
 #**************************************************************************
-def GetTraceStatParam() :
+def GetTraceStatParam_ThickMean() :
 #**************************************************************************
-#    This routine was derived from GetTraceParam.
-#    It differs from that routine in that it not only asks for the values
-#    of the input parameters (mean), but also for a standard deviation
-#    (sigma) for each parameter.                                           
+#    These routines were derived from GetTraceParamXXX                             
 #**************************************************************************
 
-									# initialize default values first
-    if TraceThickMean == 0 :
-        TraceThickMean = TraceThick
-    if TraceWidthMean == 0 :
-        TraceWidthMean = TraceWidth
-    if TraceHeightMean == 0 :
-        TraceHeightMean = TraceHeight
-    if DiConstMean == 0 :
-        DiConstMean = DiConst
-
+	# initialize default values first
+    TraceThick = 0.0021
+    TraceThickMean = TraceThick
     TraceThickMean = GetParam('What is the mean trace thickness? ',1, TraceThickMean)
-    TraceThickSigma = GetParam('What is the standard deviation? ',1, TraceThickSigma )
-    TraceWidthMean = GetParam('What is the mean trace width? ',1, TraceThickSigm)
-    TraceWidthSigma = GetParam('What is the standard deviation? ',1, TraceWidthSigma)
-    TraceHeighMean = GetParam('What is the mean trace height? ',1, TraceHeighMean)
-    TraceHeightSigma = GetParam('What is the standard deviation? ',1, TraceHeightSigma)
-    DiConstMean = GetParam('What is the mean dielectric constant? ',0, DiConstMean)
-    DiConstSigma = GetParam('What is the standard deviation? ',0, DiConstSigma)
-
     TraceThick = TraceThickMean  # Keep the entered values as defaults
-    TraceWidth = TraceWidthMean
-    TraceHeight = TraceHeightMean
-    DiConst = DiConstMean
     return TraceThickMean
-    return TraceWidthMean
-    return TraceHeightMean
-    return DiConstMean
-#end GetTraceStatParam
+#end GetTraceStatParam_ThickMean
 
+#**************************************************************************
+def GetTraceStatParam_ThickSigma() :
+#**************************************************************************
+#    These routines were derived from GetTraceParamXXX                             
+#**************************************************************************
+
+	# initialize default values first
+    TraceThickSigma = 0
+    TraceThickSigma = GetParam('What is the standard deviation for thickness? ',1, TraceThickSigma)
+    return TraceThickSigma
+#end GetTraceStatParam_ThickMean
+
+#**************************************************************************
+def GetTraceStatParam_WidthMean() :
+#**************************************************************************
+#    These routines were derived from GetTraceParamXXX                             
+#**************************************************************************
+
+	# initialize default values first
+    TraceWidth = 0.011   
+    TraceWidthMean = TraceWidth  
+    TraceWidthMean = GetParam('What is the mean trace width? ',1, TraceWidthMean)
+    TraceWidth = TraceWidthMean  # Keep the entered values as defaults
+    return TraceWidthMean
+#end GetTraceStatParam_WidthMean
+
+#**************************************************************************
+def GetTraceStatParam_WidthSigma() :
+#**************************************************************************
+#    These routines were derived from GetTraceParamXXX                             
+#**************************************************************************
+
+	# initialize default values first
+    TraceWidthSigma = 0
+    TraceWidthSigma = GetParam('What is the standard deviation for width? ',1, TraceWidthSigma)
+    return TraceWidthSigma
+#end GetTraceStatParam_WidthSigma
+
+#**************************************************************************
+def GetTraceStatParam_HeightMean() :
+#**************************************************************************
+#    These routines were derived from GetTraceParamXXX                             
+#**************************************************************************
+
+	# initialize default values first 
+    TraceHeight = 0.026  
+    TraceHeightMean = TraceHeight
+    TraceHeightMean = GetParam('What is the mean trace height? ',1, TraceHeightMean)
+    TraceHeight = TraceHeightMean  # Keep the entered values as defaults
+    return TraceHeightMean
+#end GetTraceStatParam_HeightMean
+
+#**************************************************************************
+def GetTraceStatParam_HeightSigma() :
+#**************************************************************************
+#    These routines were derived from GetTraceParamXXX                             
+#**************************************************************************
+
+	# initialize default values first
+    TraceHeightSigma = 0
+    TraceHeightSigma = GetParam('What is the standard deviation for height? ',1, TraceHeightSigma)
+    return TraceHeightSigma
+#end GetTraceStatParam_HeightSigma
+
+#**************************************************************************
+def GetTraceStatParam_DiMean() :
+#**************************************************************************
+#    These routines were derived from GetTraceParamXXX                             
+#**************************************************************************
+
+	# initialize default values first
+    DiConst = 4.7
+    DiConstMean = DiConst
+    DiConstMean = GetParam('What is the mean dielectric constant? ',0, DiConstMean)
+    DiConst = DiConstMean  # Keep the entered values as defaults
+    return DiConstMean
+#end GetTraceStatParam_DiMean
+
+#**************************************************************************
+def GetTraceStatParam_DiSigma() :
+#**************************************************************************
+#    These routines were derived from GetTraceParamXXX                             
+#**************************************************************************
+
+	# initialize default values first
+    DiConstSigma = 0
+    DiConstSigma = GetParam('What is the standard deviation for DiConst? ',0, DiConstSigma)
+    return DiConstSigma
+#end GetTraceStatParam_DiSigma
 
 #****************************************************************************
 def TraceParamOut() :
@@ -180,7 +246,7 @@ def LineAnalOut(EffImped, EffProp, IntCap, IntInduct, IntRes) :
 
 
 #**************************************************************************
-def LineAnalStatOut(EffImpedMean,EffImpedSigma,EffPropMean,EffPropSigma,IntCapMean,IntCapSigma,IntInductMean,IntInductSigma,IntResMean,IntResSigma) :
+def LineAnalStatOut(EffImpedMean,EffImpedSigma,EffPropMean,EffPropSigma,IntCapMean,IntCapSigma,IntInductMean,IntInductSigma,IntResistMean,IntResistSigma) :
 #
 #    output of the data which resulted from statistical analysis. This is
 #    basically a modified version of LineAnalOut.                          
@@ -470,3 +536,56 @@ def LoadParameters() :
 
 # end LoadParameters
 
+#****************************************************************************)
+def menu(NumOpt, Header, OptArray):
+#****************************************************************************)
+
+# This procedure provides the ability to generate a menu driven program *)
+# Options are limited to ten selections.  The Option number selected is *)
+# returned to the main program.                                         *)
+
+#var
+#  Temp,
+#  DepthMargin,
+#  WidthMargin : integer;
+#  Option : opt;
+
+#begin
+
+   Temp = 0
+   os.system('cls')   #  Clear Screen 
+   for Temp in range(1, (ScreenWidth - 48)//2 + 1) :
+       str(' ')
+   print('Board Electrical Analysis Tool - BEAT (Rev 4.0)')
+   DepthMargin = (ScreenDepth - NumOpt - 5)//2
+   WidthMargin = (ScreenWidth - 40)//2
+   for Temp in range(1, DepthMargin + 1) :
+       print('\n')
+   for Temp in range (1, WidthMargin + 1) :
+       str(' ')
+   print(Header)
+   for Temp in range(1, WidthMargin + 1) :
+       str(' ')
+   print('------------------------------------------------')
+   print('\n')
+   for Option in range(1, NumOpt + 1) :
+      # begin
+      for Temp in range(1, (WidthMargin - 3 + 1)) :
+          out = str(' ')
+          print(out, end='')
+      out = str(Option)
+      print(out, end='')
+      out = str(') ')
+      print(out, end='')
+      print(OptArray[Option])
+      # end for
+   print('\n')
+   for Temp in range(1, WidthMargin + 1) :
+       str(' ')
+   SelOpt = input("Select Option number: ")
+   return SelOpt
+   os.system('cls')
+# end menu
+
+
+            

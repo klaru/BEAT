@@ -41,7 +41,8 @@ from beatinc import *
 from beatio import *
 from beatcalc import *
 from reflectcoef import Reflectcoef
-from striplineanal import StripLineAnal
+from striplineanal import StripLineAnal, StripLineStatAnal
+from statanal import StatAnal
 from beatfourier import FourierValues, FourierAnal
 
 #****************************************************************************)
@@ -49,57 +50,6 @@ def DoesntWork():
 #****************************************************************************)
     pass
 	
-#****************************************************************************)
-def menu(NumOpt, Header, OptArray):
-#****************************************************************************)
-
-# This procedure provides the ability to generate a menu driven program *)
-# Options are limited to ten selections.  The Option number selected is *)
-# returned to the main program.                                         *)
-
-#var
-#  Temp,
-#  DepthMargin,
-#  WidthMargin : integer;
-#  Option : opt;
-
-#begin
-
-   Temp = 0
-   os.system('cls')   #  Clear Screen 
-   for Temp in range(1, (ScreenWidth - 48)//2 + 1) :
-       str(' ')
-   print('Board Electrical Analysis Tool - BEAT (Rev 4.0)')
-   DepthMargin = (ScreenDepth - NumOpt - 5)//2
-   WidthMargin = (ScreenWidth - 40)//2
-   for Temp in range(1, DepthMargin + 1) :
-       print('\n')
-   for Temp in range (1, WidthMargin + 1) :
-       str(' ')
-   print(Header)
-   for Temp in range(1, WidthMargin + 1) :
-       str(' ')
-   print('------------------------------------------------')
-   print('\n')
-   for Option in range(1, NumOpt + 1) :
-      # begin
-      for Temp in range(1, (WidthMargin - 3 + 1)) :
-          out = str(' ')
-          print(out, end='')
-      out = str(Option)
-      print(out, end='')
-      out = str(') ')
-      print(out, end='')
-      print(OptArray[Option])
-      # end for
-   print('\n')
-   for Temp in range(1, WidthMargin + 1) :
-       str(' ')
-   SelOpt = input("Select Option number: ")
-   return SelOpt
-   os.system('cls')
-# end menu
-
 
 #****************************************************************************)
 def Help():
@@ -273,7 +223,7 @@ def main ():       # begin Main Program
         elif SelOpt == '4':
             DoesntWork()		# MicroStripAnal										
         elif SelOpt == '5':
-            DoesntWork()		# DualaStripAnal
+            DoesntWork()		# DualStripAnal
         elif SelOpt == '6':
             DoesntWork()		# EmbedMicroStripAnal
         elif SelOpt == '7':
@@ -285,7 +235,7 @@ def main ():       # begin Main Program
         elif SelOpt == '10':					
             DoesntWork()		# FourierAnal
         elif SelOpt == '11':				
-            DoesntWork()		# StatAnal
+            StatAnal()
         elif SelOpt == '12':			
             DoesntWork()		# SetUnit
         elif SelOpt == "13":
