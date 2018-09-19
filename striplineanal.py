@@ -28,10 +28,7 @@ def StripLineAnal() :
         print('Stripline analysis')
         print('-----------------------------------------------------------')
         print('\n')
-        TraceThick = GetTraceParamThick()
-        TraceWidth = GetTraceParamWidth()
-        TraceHeight = GetTraceParamHeight()
-        DiConst = GetTraceParamConst()
+        TraceThick, TraceWidth, TraceHeight, DiConst = GetTraceParam()
         PlaneSpace = 2*TraceHeight + TraceThick
         ImpFactor1 = 60/math.sqrt(DiConst)
         ImpFactor2 = math.log(4*PlaneSpace/(0.67*pi*TraceWidth*(0.8 + TraceThick/TraceWidth)))
@@ -90,14 +87,8 @@ def StripLineStatAnal() :
             
         StatData = [[0 for x in range(NumIterations+2)] for y in range(6)]       
         
-        TraceThickMean = GetTraceStatParam_ThickMean()
-        TraceWidthMean = GetTraceStatParam_WidthMean()
-        TraceHeightMean = GetTraceStatParam_HeightMean()
-        DiConstMean = GetTraceStatParam_DiMean()       
-        TraceThickSigma = GetTraceStatParam_ThickSigma()
-        TraceWidthSigma = GetTraceStatParam_WidthSigma()
-        TraceHeightSigma = GetTraceStatParam_HeightSigma()
-        DiConstSigma = GetTraceStatParam_DiSigma()    
+        TraceThickMean, TraceWidthMean, TraceHeightMean, DiConstMean,  \
+        TraceThickSigma, TraceWidthSigma, TraceHeightSigma, DiConstSigma = GetTraceStatParam()    
         print('\n')
         print('Working')
 

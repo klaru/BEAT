@@ -3,7 +3,7 @@
 ImpedOfFreeSpace = 377  # Ohms 
 SpeedOfLight = 9.84e8   # Ft/sec 
 pi = 3.1415927
-#ResistCopper = 6.79e-7  # Ohms inch 
+ResistCopper = 6.79e-7  # Ohms inch 
 ScreenDepth = 24
 ScreenWidth = 80
 BIG = 1.0e36
@@ -38,4 +38,4 @@ DistCap = 0
 #TraceHeight = 0.026
 TraceSpacing = 0.089
 Period = 20.0
-SigPlaneSep = 0.004
+#SigPlaneSep = 0.004

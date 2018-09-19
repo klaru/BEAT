@@ -62,156 +62,62 @@ def GetResponse (question, yn) :
 #end  GetResponse
 
 #****************************************************************************
-def GetTraceParamThick() :
+def GetTraceParam() :
 #****************************************************************************
     UnitSys = 0
     TraceThick = 0.0021
+    TraceWidth = 0.011
+    TraceHeight = 0.026
+    DiConst = 4.7
     if UnitSys == 1 :
         TraceThick  = TraceThick * 25.4
-        TraceThick = GetParam('What is the trace thickness? [mm]  ',1, TraceThick)
-    else :
-        TraceThick = GetParam('What is the trace thickness? [in]  ',1, TraceThick)
-    return TraceThick
-#end GetTraceParamThick
-
-#****************************************************************************
-def GetTraceParamWidth() :
-#****************************************************************************
-    UnitSys = 0
-    TraceWidth = 0.011
-    if UnitSys == 1 :
         TraceWidth  = TraceWidth * 25.4
-        TraceWidth = GetParam('What is the trace width? [mm]  ',1, TraceWidth)
-    else :
-        TraceWidth = GetParam('What is the trace width? [in]  ',1, TraceWidth)
-    return TraceWidth
-#end GetTraceParamWidth
-
-#****************************************************************************
-def GetTraceParamHeight() :
-#****************************************************************************
-    UnitSys = 0
-    TraceHeight = 0.026
-    if UnitSys == 1 :
         TraceHeight = TraceHeight * 25.4
+        TraceThick = GetParam('What is the trace thickness? [mm]  ',1, TraceThick)
+        TraceWidth = GetParam('What is the trace width? [mm]  ',1, TraceWidth)
         TraceHeight = GetParam('What is the trace height? [mm]  ',1, TraceHeight)
     else :
+        TraceThick = GetParam('What is the trace thickness? [in]  ',1, TraceThick)
+        TraceWidth = GetParam('What is the trace width? [in]  ',1, TraceWidth)
         TraceHeight = GetParam('What is the trace height? [in]  ',1, TraceHeight)
-    return TraceHeight
-#end GetTraceParamHeight
-
-#****************************************************************************
-def GetTraceParamConst() :
-#****************************************************************************
-    UnitSys = 0
-    DiConst = 4.7
     DiConst = GetParam('What is the dielectric constant? ',0, DiConst)
-    return DiConst
-#end GetTraceParamConst
+    return TraceThick, TraceWidth, TraceHeight, DiConst
+#end GetTraceParam
 
 #**************************************************************************
-def GetTraceStatParam_ThickMean() :
+def GetTraceStatParam() :
 #**************************************************************************
 #    These routines were derived from GetTraceParamXXX                             
 #**************************************************************************
 
 	# initialize default values first
     TraceThick = 0.0021
-    TraceThickMean = TraceThick
-    TraceThickMean = GetParam('What is the mean trace thickness? ',1, TraceThickMean)
-    TraceThick = TraceThickMean  # Keep the entered values as defaults
-    return TraceThickMean
-#end GetTraceStatParam_ThickMean
-
-#**************************************************************************
-def GetTraceStatParam_ThickSigma() :
-#**************************************************************************
-#    These routines were derived from GetTraceParamXXX                             
-#**************************************************************************
-
-	# initialize default values first
     TraceThickSigma = 0
-    TraceThickSigma = GetParam('What is the standard deviation for thickness? ',1, TraceThickSigma)
-    return TraceThickSigma
-#end GetTraceStatParam_ThickMean
-
-#**************************************************************************
-def GetTraceStatParam_WidthMean() :
-#**************************************************************************
-#    These routines were derived from GetTraceParamXXX                             
-#**************************************************************************
-
-	# initialize default values first
     TraceWidth = 0.011   
-    TraceWidthMean = TraceWidth  
-    TraceWidthMean = GetParam('What is the mean trace width? ',1, TraceWidthMean)
-    TraceWidth = TraceWidthMean  # Keep the entered values as defaults
-    return TraceWidthMean
-#end GetTraceStatParam_WidthMean
-
-#**************************************************************************
-def GetTraceStatParam_WidthSigma() :
-#**************************************************************************
-#    These routines were derived from GetTraceParamXXX                             
-#**************************************************************************
-
-	# initialize default values first
     TraceWidthSigma = 0
-    TraceWidthSigma = GetParam('What is the standard deviation for width? ',1, TraceWidthSigma)
-    return TraceWidthSigma
-#end GetTraceStatParam_WidthSigma
-
-#**************************************************************************
-def GetTraceStatParam_HeightMean() :
-#**************************************************************************
-#    These routines were derived from GetTraceParamXXX                             
-#**************************************************************************
-
-	# initialize default values first 
-    TraceHeight = 0.026  
-    TraceHeightMean = TraceHeight
-    TraceHeightMean = GetParam('What is the mean trace height? ',1, TraceHeightMean)
-    TraceHeight = TraceHeightMean  # Keep the entered values as defaults
-    return TraceHeightMean
-#end GetTraceStatParam_HeightMean
-
-#**************************************************************************
-def GetTraceStatParam_HeightSigma() :
-#**************************************************************************
-#    These routines were derived from GetTraceParamXXX                             
-#**************************************************************************
-
-	# initialize default values first
+    TraceHeight = 0.026 
     TraceHeightSigma = 0
-    TraceHeightSigma = GetParam('What is the standard deviation for height? ',1, TraceHeightSigma)
-    return TraceHeightSigma
-#end GetTraceStatParam_HeightSigma
-
-#**************************************************************************
-def GetTraceStatParam_DiMean() :
-#**************************************************************************
-#    These routines were derived from GetTraceParamXXX                             
-#**************************************************************************
-
-	# initialize default values first
     DiConst = 4.7
-    DiConstMean = DiConst
-    DiConstMean = GetParam('What is the mean dielectric constant? ',0, DiConstMean)
-    DiConst = DiConstMean  # Keep the entered values as defaults
-    return DiConstMean
-#end GetTraceStatParam_DiMean
-
-#**************************************************************************
-def GetTraceStatParam_DiSigma() :
-#**************************************************************************
-#    These routines were derived from GetTraceParamXXX                             
-#**************************************************************************
-
-	# initialize default values first
     DiConstSigma = 0
+    TraceWidthMean = TraceWidth 
+    TraceThickMean = TraceThick
+    TraceHeightMean = TraceHeight
+    DiConstMean = DiConst
+    TraceThickMean = GetParam('What is the mean trace thickness? ',1, TraceThickMean)
+    TraceThickSigma = GetParam('What is the standard deviation for thickness? ',1, TraceThickSigma)
+    TraceWidthMean = GetParam('What is the mean trace width? ',1, TraceWidthMean)
+    TraceWidthSigma = GetParam('What is the standard deviation for width? ',1, TraceWidthSigma)
+    TraceHeightMean = GetParam('What is the mean trace height? ',1, TraceHeightMean)
+    TraceHeightSigma = GetParam('What is the standard deviation for height? ',1, TraceHeightSigma)
+    DiConstMean = GetParam('What is the mean dielectric constant? ',0, DiConstMean)
     DiConstSigma = GetParam('What is the standard deviation for DiConst? ',0, DiConstSigma)
-    return DiConstSigma
-#end GetTraceStatParam_DiSigma
+    TraceThick = TraceThickMean  # Keep the entered values as defaults
+    TraceWidth = TraceWidthMean
+    TraceHeight = TraceHeightMean
+    DiConst = DiConstMean
+    return TraceThickMean, TraceThickSigma, TraceWidthMean, TraceWidthSigma, TraceHeightMean, TraceHeightSigma, \
+           DiConstMean, DiConstSigma 
+#end GetTraceStatParam
 
 #****************************************************************************
 def TraceParamOut() :

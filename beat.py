@@ -42,6 +42,8 @@ from beatio import *
 from beatcalc import *
 from reflectcoef import Reflectcoef
 from striplineanal import StripLineAnal, StripLineStatAnal
+from microstriplineanal import MicroStripAnal
+from dualstriplineanal import DualStripAnal
 from statanal import StatAnal
 from beatfourier import FourierValues, FourierAnal
 
@@ -221,9 +223,9 @@ def main ():       # begin Main Program
         elif SelOpt == '3':
 	        StripLineAnal()
         elif SelOpt == '4':
-            DoesntWork()		# MicroStripAnal										
+            MicroStripAnal()									
         elif SelOpt == '5':
-            DoesntWork()		# DualStripAnal
+            DualStripAnal()
         elif SelOpt == '6':
             DoesntWork()		# EmbedMicroStripAnal
         elif SelOpt == '7':

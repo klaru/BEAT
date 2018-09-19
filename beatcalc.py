@@ -34,6 +34,14 @@ def RNDNormal(center, sigma) :
     return RNDNormal
 #end RNDNormal
 
+#****************************************************************************
+def IntResist(TraceThick, TraceWidth):
+# Calculates the trace resist in mohms per inch of copper trace 
+#****************************************************************************
+
+    IntResist = ResistCopper/(TraceThick * TraceWidth)*1000
+    return IntResist
+    
 
 #***************************************************************************
 def LineImped(Prop,LowCap,UpCap1,UpCap2,FringeCap1,FringeCap2) :
@@ -64,7 +72,7 @@ def LineImped(Prop,LowCap,UpCap1,UpCap2,FringeCap1,FringeCap2) :
 #end LineImped
 
 #****************************************************************************
-def PropConst(LowCap, UpCap1, UpCap2, FringeCap1, FringeCap2) :
+def PropConst(LowCap, UpCap1, UpCap2, FringeCap1, FringeCap2, DiConst, EffDiConst) :
 #                                                                          
 # Calculates the propagation constant of a microstrip trace using the model
 # defined by Schwarzmann in his paper "Microstrip plus equations adds      
@@ -89,15 +97,15 @@ def PropConst(LowCap, UpCap1, UpCap2, FringeCap1, FringeCap2) :
 #   VelConst : real;
 
     Cap = LowCap + FringeCap1 + FringeCap2 + UpCap1 + UpCap2
-    VelSub = 1/(1 + ((FringeCap1 + FringeCap2)*(DiConst/EffDiConst - 1) + (UpCap1 + UpCap2)*(sqrt(DiConst) - 1))/Cap)
-    VelConst = 1/math.sqrt(1 + sqr(VelSub)*(DiConst -1))
+    VelSub = 1/(1 + ((FringeCap1 + FringeCap2)*(DiConst/EffDiConst - 1) + (UpCap1 + UpCap2)*(math.sqrt(DiConst) - 1))/Cap)
+    VelConst = 1/math.sqrt(1 + math.pow(VelSub,2)*(DiConst -1))
     IntProp = 1/(SpeedOfLight * VelConst) * 1e9
     return IntProp
 #end PropConst 
 
 
 #***************************************************************************
-def LineCap(LowCap, UpCap) :
+def LineCap(TraceThick, TraceWidth, TraceHeight, DiConst, EffDiConst) :
 #                                                                          
 # Calculates the capacitances of a microstrip trace using the model        
 # defined by Schwarzmann in his paper "Microstrip plus equations adds      
@@ -111,13 +119,13 @@ def LineCap(LowCap, UpCap) :
 #***************************************************************************
 #var
 #   CommonTerm : real;
-
+    
     CommonTerm = DiConst / (SpeedOfLight * ImpedOfFreeSpace)
     LowCap = CommonTerm * TraceWidth / TraceHeight * 1e12
     UpCap = 2/6 * (LowCap/math.sqrt(DiConst))
     FringeCap = CommonTerm*(EffDiConst/DiConst) * pi / math.log(4*TraceHeight/TraceThick) * 1e12
-    return FringeCap
-#end LinCap
+    return LowCap, UpCap, FringeCap
+#end LineCap
 
 #****************************************************************************
 def EvenLineCap(EvenUpCap) :
@@ -141,7 +149,7 @@ def EvenLineCap(EvenUpCap) :
 #end EvenLineCap
 
 #***************************************************************************
-def OddLineCap(OddUpCap) :
+def OddLineCap(OddUpCap, DiConst, EffDiConst) :
 #                                                                          
 # Calculates the capacitances of a microstrip trace using the model        
 # defined by Schwarzmann in his paper "Microstrip plus equations adds      
