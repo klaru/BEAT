@@ -33,7 +33,6 @@
 #                                                                            
 #*****************************************************************************
 
-
 # BrdElectAnalTool (input,output,FourierCoefDat,OutDat
 #                                   ,FreqDat1,FreqDat2);
 import os, sys
