@@ -65,10 +65,7 @@ def GetResponse (question, yn) :
 def GetTraceParam() :
 #****************************************************************************
     UnitSys = 0
-    TraceThick = 0.0021
-    TraceWidth = 0.011
-    TraceHeight = 0.026
-    DiConst = 4.7
+    global TraceThick, TraceWidth, TraceHeight, DiConst
     if UnitSys == 1 :
         TraceThick  = TraceThick * 25.4
         TraceWidth  = TraceWidth * 25.4
@@ -91,14 +88,8 @@ def GetTraceStatParam() :
 #**************************************************************************
 
 	# initialize default values first
-    TraceThick = 0.0021
-    TraceThickSigma = 0
-    TraceWidth = 0.011   
-    TraceWidthSigma = 0
-    TraceHeight = 0.026 
-    TraceHeightSigma = 0
-    DiConst = 4.7
-    DiConstSigma = 0
+    global TraceThick, TraceWidth, TraceHeight, DiConst, \
+           TraceThickSigma, TraceWidthSigma, TraceHeightSigma, DiConstSigma
     TraceWidthMean = TraceWidth 
     TraceThickMean = TraceThick
     TraceHeightMean = TraceHeight
@@ -456,8 +447,6 @@ def menu(NumOpt, Header, OptArray):
 #  WidthMargin : integer;
 #  Option : opt;
 
-#begin
-
    Temp = 0
    os.system('cls')   #  Clear Screen 
    for Temp in range(1, (ScreenWidth - 48)//2 + 1) :
@@ -475,7 +464,6 @@ def menu(NumOpt, Header, OptArray):
    print('------------------------------------------------')
    print('\n')
    for Option in range(1, NumOpt + 1) :
-      # begin
       for Temp in range(1, (WidthMargin - 3 + 1)) :
           out = str(' ')
           print(out, end='')
@@ -484,14 +472,13 @@ def menu(NumOpt, Header, OptArray):
       out = str(') ')
       print(out, end='')
       print(OptArray[Option])
-      # end for
    print('\n')
    for Temp in range(1, WidthMargin + 1) :
        str(' ')
    SelOpt = input("Select Option number: ")
    return SelOpt
    os.system('cls')
-# end menu
+
 
 
             

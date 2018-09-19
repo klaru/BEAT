@@ -20,7 +20,6 @@ def StripLineAnal() :
 #   PlaneSpace,
 #   ImpFactor1,ImpFactor2 : real;
 #   Again : boolean;
-    ResistCopper = 6.79e-7  		 # Ohms inch
 	
     Again = True
     while Again == True :
@@ -63,12 +62,11 @@ def StripLineStatAnal() :
 #   Again : boolean
 
 #begin 
-    ResistCopper = 6.79e-7  		 # Ohms inch
+    global NumIterations, IterationsMax, ResistCopper
     Again = True
     answer = ''
     while Again == True :
     #begin
-        NumIterations = 1
         os.system('cls')
         print('S t a t i s t i c a l    Strip Line Analysis')
         print('-----------------------------------------------------------')
@@ -87,8 +85,8 @@ def StripLineStatAnal() :
             
         StatData = [[0 for x in range(NumIterations+2)] for y in range(6)]       
         
-        TraceThickMean, TraceWidthMean, TraceHeightMean, DiConstMean,  \
-        TraceThickSigma, TraceWidthSigma, TraceHeightSigma, DiConstSigma = GetTraceStatParam()    
+        TraceThickMean, TraceThickSigma, TraceWidthMean, TraceWidthSigma,  \
+        TraceHeightMean, TraceHeightSigma, DiConstMean, DiConstSigma = GetTraceStatParam()    
         print('\n')
         print('Working')
 

@@ -34,14 +34,6 @@ def RNDNormal(center, sigma) :
     return RNDNormal
 #end RNDNormal
 
-#****************************************************************************
-def IntResist(TraceThick, TraceWidth):
-# Calculates the trace resist in mohms per inch of copper trace 
-#****************************************************************************
-
-    IntResist = ResistCopper/(TraceThick * TraceWidth)*1000
-    return IntResist
-    
 
 #***************************************************************************
 def LineImped(Prop,LowCap,UpCap1,UpCap2,FringeCap1,FringeCap2) :

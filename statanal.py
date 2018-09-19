@@ -10,7 +10,7 @@ def StatAnal() :
 
 #var Ende : boolean
 
-    Ende = False
+    global Ende, SelOpt
     while Ende == False :
         Header = 'Statistical Analysis'
         OptArray[1] = 'Exit to Main Menue'
@@ -23,9 +23,9 @@ def StatAnal() :
             Ende = True
         elif SelOpt == '2' :
             StripLineStatAnal()
-        elif Selopt == '3' :
+        elif SelOpt == '3' :
             pass    #MicroStripStatAnal()
-        elif Selopt == '4' :
+        elif SelOpt == '4' :
             pass    #DualStripStatAnal()
         else:
             pass    #5 : EmbedMicroStripStatAnal()

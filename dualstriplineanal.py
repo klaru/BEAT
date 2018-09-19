@@ -19,8 +19,8 @@ def DualStripAnal():
 #   Cap, Induct,
 #   ImpFactor1,ImpFactor2, ImpFactor3 : real
 #   Again : boolean
-    SigPlaneSep = 0.004
 
+    global SigPlaneSep
     Again = True
     while Again == True :
         os.system('cls')
@@ -36,7 +36,7 @@ def DualStripAnal():
         IntProp = 1.017*math.sqrt(DiConst)
         Cap = IntProp/IntImped*1e3/12
         Induct = IntProp * IntImped/12
-        Resist = IntResist(TraceThick, TraceWidth)
+        Resist = ResistCopper/(TraceThick * TraceWidth)*1000
         LineAnalOut(IntImped, IntProp, Cap, Induct, Resist)
         Again = GetResponse('Another dual-stripline analysis (y/n)?', 'n')
         if (Again == False) : break

@@ -29,9 +29,8 @@ def MicroStripAnal():
 #   Cap, Induct : real
 #   Again: boolean
 #   temp : char
-    SoldMask = 'n'
-    EffDiConst = 0
     
+    SoldMask = 'n'
     Again = True
     while Again == True :
         os.system('cls')
@@ -54,7 +53,7 @@ def MicroStripAnal():
         IntImped = LineImped(IntProp, LowCap, UpCap, UpCap, FringeCap, FringeCap)
         Cap = (2*(UpCap + FringeCap) + LowCap)/12
         Induct = IntProp * IntImped/12
-        Resist = IntResist(TraceThick, TraceWidth)
+        Resist = ResistCopper/(TraceThick * TraceWidth)*1000
         LineAnalOut(IntImped, IntProp, Cap, Induct, Resist)
         Again = GetResponse('Another micro-stripline analysis (y/n)?', 'n')
         if (Again == False) : break
