@@ -4,7 +4,6 @@ from beatinc import *
 from beatio import *
 from beatcalc import *
 
-
 #****************************************************************************
 def StripLineAnal() :
 #                                                                          
@@ -71,26 +70,16 @@ def StripLineStatAnal() :
         print('S t a t i s t i c a l    Strip Line Analysis')
         print('-----------------------------------------------------------')
         print('\n')
-        while True:    
-            NumIterations = GetIParam('Enter number of iterations :', NumIterations)
-            if (NumIterations <= 0) or (NumIterations > IterationsMax) :
-                print('\n')
-                print('The number of iterations must be more than 1.')
-                print('If you want to exceed ',IterationsMax,' Iterations,')
-                print('you will have to change the #constant "IterationsMax"')
-                print('in "beat.h" and recompile the program.')
-                print('\n')
-                answer = GetResponse('Hit >RETURN< to continue','y')            
-            if (NumIterations > 0) and (NumIterations <= IterationsMax) : break
+        NumIterations = StatIterNum(NumIterations)
             
-        StatData = [[0 for x in range(NumIterations+2)] for y in range(6)]       
+        StatData = [[0 for x in range(NumIterations+2)] for y in range(6)] 
         
         TraceThickMean, TraceThickSigma, TraceWidthMean, TraceWidthSigma,  \
         TraceHeightMean, TraceHeightSigma, DiConstMean, DiConstSigma = GetTraceStatParam()    
         print('\n')
         print('Working')
 
-        for i in range(1, NumIterations + 1) :                          #begin   Main Loop 
+        for i in range(1, NumIterations + 1) :                          #begin for  Main Loop 
             TraceThickVal = RNDNormal(TraceThickMean,TraceThickSigma)   #Get 
             TraceWidthVal = RNDNormal(TraceWidthMean,TraceWidthSigma)   #Value
             TraceHeightVal = RNDNormal(TraceHeightMean,TraceHeightSigma)#for
@@ -110,14 +99,14 @@ def StripLineStatAnal() :
             StatData[3][i] = Cap
             StatData[4][i] = Induct
             StatData[5][i] = Resist
-        #end     Main Loop 
+        #end for   Main Loop 
 
         IntImpedMean = 0  # initialize #variables to determine mean value 
         IntPropMean = 0   # of each output parameter 
         CapMean = 0
         InductMean = 0
         ResistMean = 0
-        for i in range(1, NumIterations + 1) :                       #begin determine mean 
+        for i in range(1, NumIterations + 1) :             
             IntImpedMean = IntImpedMean + StatData[1][i]
             IntPropMean = IntPropMean + StatData[2][i]
             CapMean = CapMean + StatData[3][i]

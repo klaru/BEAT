@@ -22,27 +22,26 @@
 #                                                                            
 #  Key Global Variables:                                                     
 #                                                                            
-# 	IntImped (ohms)	= Intrinsic impedance of a line (no dist. cap.)      
-#	EffImped (ohms)	= Effective impedance after dist. cap. considered.   
-#	IntProp (ns/ft)= Intrinsic prop. delay of a line (no dist. cap.)    
-#	EffProp (ns/ft)= Effective prop. delay after dist. cap. considered.
-#	IntCap (pf/in)	= Intrinsic capacitance of the line.                 
-#	DistCap	(pf/in)	= Extra capacitance distributed along a line.        
-#	IntInd (nH/in)	= Intrinsic inductance of the line.                  
-#	IntRes (ohms/in)= Intrinsic resistance of the line.                  
+# 	IntImped (ohms)  = Intrinsic impedance of a line (no dist. cap.)      
+#	EffImped (ohms)	 = Effective impedance after dist. cap. considered.   
+#	IntProp (ns/ft)  = Intrinsic prop. delay of a line (no dist. cap.)    
+#	EffProp (ns/ft)  = Effective prop. delay after dist. cap. considered.
+#	IntCap (pf/in)	 = Intrinsic capacitance of the line.                 
+#	DistCap	(pf/in)  = Extra capacitance distributed along a line.        
+#	IntInd (nH/in)	 = Intrinsic inductance of the line.                  
+#	IntRes (ohms/in) = Intrinsic resistance of the line.                  
 #                                                                            
 #*****************************************************************************
 
-# BrdElectAnalTool (input,output,FourierCoefDat,OutDat
-#                                   ,FreqDat1,FreqDat2);
 import os, sys
 from beatinc import *
 from beatio import *
 from beatcalc import *
 from reflectcoef import Reflectcoef
-from striplineanal import StripLineAnal, StripLineStatAnal
+from striplineanal import StripLineAnal
 from microstriplineanal import MicroStripAnal
 from dualstriplineanal import DualStripAnal
+from embedmicrostriplineanal import EmbeddedMicroStripAnal
 from statanal import StatAnal
 from beatfourier import FourierValues, FourierAnal
 
@@ -65,7 +64,7 @@ def Help():
         	
 	
 # Reset selected help file and display the file
-    Ende = False
+    global Ende
     while Ende == False: # begin
         Header = 'Electrical Analysis - Help Menu - BEAT (Rev 4.0)'
         OptArray[1] = 'Return to Main Menu'
@@ -122,7 +121,7 @@ def Help():
 
 def main ():       # begin Main Program
 
-    from beatinc import Ende
+    global Ende
 
     Time[1] =  0.0
     Magnitude[1] = 0.0
@@ -138,12 +137,6 @@ def main ():       # begin Main Program
    
     Time[5] = 13.0
     Magnitude[5] = 0.0
-   
-    NumHarmonics = 10
-    SoldMask = 'n'
-    base[1] = 'Metric'
-    base[2] = 'Imperial'
-    UnitSys = 2                             # Default: Imperial System
 	
     InputUnits = [[0 for x in range(11)] for y in range(3)]
     UnitConversion = [[0 for x in range(11)] for y in range(3)]
@@ -226,7 +219,7 @@ def main ():       # begin Main Program
         elif SelOpt == '5':
             DualStripAnal()
         elif SelOpt == '6':
-            DoesntWork()		# EmbedMicroStripAnal
+            EmbeddedMicroStripAnal()
         elif SelOpt == '7':
             DoesntWork()		# DistCapAnal
         elif SelOpt == '8':

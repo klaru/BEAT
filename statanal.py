@@ -3,6 +3,9 @@ import os, sys
 from beatinc import *
 from beatio import *
 from striplineanal import StripLineStatAnal
+from microstriplineanal import MicroStripStatAnal
+from dualstriplineanal import DualStripStatAnal
+from embedmicrostriplineanal import EmbedMicroStripStatAnal
 
 #************************************************************************
 def StatAnal() :
@@ -17,15 +20,17 @@ def StatAnal() :
         OptArray[2] = 'Strip Line Analysis'
         OptArray[3] = 'Microstrip Line Analysis'
         OptArray[4] = 'Dual-Strip Line Analysis' 
-#       OptArray[5] = 'Embedded Strip Line Analysis' 
-        SelOpt = menu(4,Header,OptArray)
+        OptArray[5] = 'Embedded Strip Line Analysis' 
+        SelOpt = menu(5,Header,OptArray)
         if SelOpt == '1' :
             Ende = True
         elif SelOpt == '2' :
             StripLineStatAnal()
         elif SelOpt == '3' :
-            pass    #MicroStripStatAnal()
+            MicroStripStatAnal()
         elif SelOpt == '4' :
-            pass    #DualStripStatAnal()
-        else:
-            pass    #5 : EmbedMicroStripStatAnal()
+            DualStripStatAnal()
+        elif SelOpt == '5' :
+            EmbedMicroStripStatAnal()
+        else :
+            pass

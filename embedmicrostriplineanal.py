@@ -5,21 +5,11 @@ from beatio import *
 from beatcalc import *
 
 #**************************************************************************
-def MicroStripAnal():
+def EmbeddedMicroStripAnal():
 #                                                                          
-# Calculates the line impedance of a microstrip trace using the model      
-# defined by Schwarzmann in his paper "Microstrip plus equations adds      
-# up to fast designs" for an isolated conductor. He breaks the line        
-# capacitance up into:                                                     
-#                                                                          
-#   Cppu = the upper plate capacitance (UpCap)                            
-#   Cpp  = the lower plate capacitance (LowCap)                           
-#   Cf   = the fringe capacitances (FringeCap)                            
-#                                                                          
-# Corrections to the propagation #constant (because of solder mask have     
-# been added based on emperical data from GS2 boards.  The correction      
-# factor was derived similar to the techinique in "Characteristics of      
-# Microstrip Transmission Lines", by H. R. Kaupp.                          
+# Calculates the line impedance of an embedded microstrip trace by calculating
+# first the impedance of  the microstripline case and then adjusting for the
+# higher effective impedance of the embedded case                        
 #                                                                          
 # Please keep in mind that the same equations used in this def are
 #   also contained in MicroStripStatAnal.                                    
@@ -30,56 +20,43 @@ def MicroStripAnal():
 #   Again: boolean
 #   temp : char
     
-    global SoldMask
+    global EmbedHeight
     Again = True
     while Again == True :
         os.system('cls')
-        print('Micro-stripline analysis')
+        print('Embedded micro-stripline analysis')
         print('-----------------------------------------------------------')
         print('\n')
-        TraceThick, TraceWidth, TraceHeight, DiConst = GetTraceParam()        
-        print('Solder mask? (w-wet, d-dry, n-none)  [', SoldMask,']', end="")
-        while True :
-            temp = input()
-            if (temp == 'n') or (temp == 'w') or (temp == 'd') or (temp == ''): break
-        if temp == "" : temp = 'n'
-        if (temp != '') : 
-            SoldMask = temp
-            if SoldMask == 'n' : EffDiConst = 0.475*DiConst + 0.67
-            elif SoldMask == 'w' : EffDiConst = 0.58*DiConst + 0.55
-            elif SoldMask == 'd' : EffDiConst = DiConst
+        TraceThick, TraceWidth, TraceHeight, DiConst = GetTraceParam()   
+        EmbedHeight = GetParam('What is the dielectrical height above the bottom of the trace? ',1, EmbedHeight)
+        EffDiConst = DiConst
         LowCap, UpCap, FringeCap = LineCap(TraceThick, TraceWidth, TraceHeight, DiConst, EffDiConst)
         IntProp = PropConst(LowCap, UpCap, UpCap, FringeCap, FringeCap, DiConst, EffDiConst)
         IntImped = LineImped(IntProp, LowCap, UpCap, UpCap, FringeCap, FringeCap)
+        EffDiConstmicro = IntProp*1e9*IntProp*1e9/(SpeedOfLight*SpeedOfLight)
+        EffDiConstburied = EffDiConstmicro*math.exp(-2*EmbedHeight/TraceHeight) + DiConst*(1 - math.exp(-2*EmbedHeight/TraceHeight))
+        LowCap, UpCap, FringeCap = LineCap(TraceThick, TraceWidth, TraceHeight, DiConst, EffDiConstburied)
+        IntPropEmbed = PropConst(LowCap, UpCap, UpCap, FringeCap, FringeCap, DiConst, EffDiConstburied)
+        IntImpedEmbed = IntImped*math.sqrt(EffDiConstmicro)/math.sqrt(EffDiConstburied)
         Cap = (2*(UpCap + FringeCap) + LowCap)/12
-        Induct = IntProp * IntImped/12
+        Induct = IntPropEmbed * IntImpedEmbed/12
         Resist = ResistCopper/(TraceThick * TraceWidth)*1000
-        LineAnalOut(IntImped, IntProp, Cap, Induct, Resist)
+        LineAnalOut(IntImpedEmbed, IntPropEmbed, Cap, Induct, Resist)
         Again = GetResponse('Another micro-stripline analysis (y/n)?', 'n')
         if (Again == False) : break
 
         
 #************************************************************************
-def MicroStripStatAnal():
+def EmbedMicroStripStatAnal():
 #                                                                          
-# Calculates the line impedance of a microstrip trace using the model      
-# defined by Schwarzmann in his paper "Microstrip plus equations adds      
-# up to fast designs" for an isolated conductor. He breaks the line        
-# capacitance up into:                                                     
-#                                                                          
-#   Cppu = the upper plate capacitance (UpCap)                            
-#   Cpp  = the lower plate capacitance (LowCap)                           
-#   Cf   = the fringe capacitances (FringeCap)                            
-#                                                                          
-# Corrections to the propagation #constant (because of solder mask have     
-# been added based on emperical data from GS2 boards.  The correction      
-# factor was derived similar to the techinique in "Characteristics of      
-# Microstrip Transmission Lines", by H. R. Kaupp.                          
+#  Calculates the line impedance of an embedded microstrip trace by calculating
+#  first the impedance of  the microstripline case and then adjusting for the
+#  higher effective impedance of the embedded case                         
 #                                                                          
 #  Containes the same equations as MicroStripAnal, however this routine
-#    is controlled by some statistics code.
-#    For comments on program statements, please refer to StripLineStatAnal,
-#    which is structured similarly                                           
+#  is controlled by some statistics code.
+#  For comments on program statements, please refer to StripLineStatAnal,
+#  which is structured similarly                                           
 #**************************************************************************
 
 #var
@@ -89,11 +66,11 @@ def MicroStripStatAnal():
 #   Again : boolean
 #   temp : char
 
-    global TraceThick, TraceWidth, TraceHeight, DiConst, EffDiConst, NumIterations, IterationsMax, ResistCopper, SoldMask
+    global TraceThick, TraceWidth, TraceHeight, DiConst, EffDiConst, NumIterations, IterationsMax, ResistCopper, EmbedHeight, EmbedHeightSigma
     Again = True
     while Again == True :
         os.system('cls')
-        print ('S t a t i s t i c a l    Microstrip Line Analysis')
+        print ('S t a t i s t i c a l    Embedded microstripline Analysis')
         print ('-----------------------------------------------------------')
         print('\n')
         NumIterations = StatIterNum(NumIterations)
@@ -102,38 +79,37 @@ def MicroStripStatAnal():
      
         TraceThickMean, TraceThickSigma, TraceWidthMean, TraceWidthSigma,  \
         TraceHeightMean, TraceHeightSigma, DiConstMean, DiConstSigma = GetTraceStatParam()
-        print('Solder mask? (w-wet, d-dry, n-none)  [', SoldMask,']', end="")
-        while True :
-            temp = input()
-            if (temp == 'n') or (temp == 'w') or (temp == 'd') or (temp == ''): break
-        if temp == "" : temp = 'n'
-        if (temp != '') : 
-            SoldMask = temp
+        EmbedHeightMean = EmbedHeight  # Get default value 
+        EmbedHeightMean = GetParam('What is the dielectrical height above the bottom of the trace? ',1, EmbedHeightMean)
+        EmbedHeightSigma = GetParam('What is the standard deviation for dielectric height above? ',1, EmbedHeightSigma)
+        EmbedHeight = EmbedHeightMean  # Keep as default value 
+        
         TraceThickVal = TraceThick
         TraceWidthVal = TraceWidth
         TraceHeightVal = TraceHeight
         DiConstVal = DiConst
         EffDiConstVal = EffDiConst
-        print('\n')
-        print ('Working')
         for i in range(1,  NumIterations +1) :
             TraceThickVal = RNDNormal(TraceThickMean,TraceThickSigma)
             TraceWidthVal = RNDNormal(TraceWidthMean,TraceWidthSigma)
             TraceHeightVal = RNDNormal(TraceHeightMean,TraceHeightSigma)
-            DiConstVal = RNDNormal(DiConstMean,DiConstSigma)            
-            if SoldMask == 'n' : EffDiConstVal = 0.475*DiConstVal + 0.67
-            elif SoldMask == 'w' : EffDiConstVal = 0.58*DiConstVal + 0.55
-            elif SoldMask == 'd' : EffDiConstVal = DiConstVal
+            DiConstVal = RNDNormal(DiConstMean,DiConstSigma)   
+            EffDiConstVal = DiConstVal            
                    
             LowCap, UpCap, FringeCap = LineCap(TraceThickVal, TraceWidthVal, TraceHeightVal, DiConstVal, EffDiConstVal)
             IntProp = PropConst (LowCap, UpCap, UpCap, FringeCap, FringeCap, DiConstVal, EffDiConstVal)
             IntImped = LineImped (IntProp, LowCap, UpCap, UpCap, FringeCap, FringeCap)
+            EffDiConstmicro = IntProp*1e9*IntProp*1e9/(SpeedOfLight*SpeedOfLight)
+            EffDiConstburied = EffDiConstmicro*math.exp(-2*EmbedHeight/TraceHeight) + DiConst*(1 - math.exp(-2*EmbedHeight/TraceHeight))
+            LowCap, UpCap, FringeCap = LineCap(TraceThick, TraceWidth, TraceHeight, DiConst, EffDiConstburied)
+            IntPropEmbed = PropConst(LowCap, UpCap, UpCap, FringeCap, FringeCap, DiConst, EffDiConstburied)
+            IntImpedEmbed = IntImped*math.sqrt(EffDiConstmicro)/math.sqrt(EffDiConstburied)            
             Cap = (2*(UpCap + FringeCap) + LowCap)/12
-            Induct = IntProp * IntImped/12
+            Induct = IntPropEmbed * IntImpedEmbed/12
             Resist = ResistCopper/(TraceThickVal * TraceWidthVal)*1000
 
-            StatData[1][i] = IntImped
-            StatData[2][i] = IntProp
+            StatData[1][i] = IntImpedEmbed
+            StatData[2][i] = IntPropEmbed
             StatData[3][i] = Cap
             StatData[4][i] = Induct
             StatData[5][i] = Resist
@@ -182,7 +158,7 @@ def MicroStripStatAnal():
 
         LineAnalStatOut(IntImpedMean,IntImpedSigma, IntPropMean,IntPropSigma, \
             CapMean,CapSigma, InductMean,InductSigma, ResistMean,ResistSigma)
-        Again = GetResponse('Another statistical stripline analysis (y/n)?', 'n')
+        Again = GetResponse('Another statistical embedded microstripline analysis (y/n)?', 'n')
         if (Again == False) : break
 
 

@@ -16,14 +16,15 @@ IterationsMax = 100     # Max Num of iterations for stat analysis
 
 # variables
 OptArray = [None] * 15
-helpfile = ('')			# default helpfile
 
 # Define default parameter values
 NumPoints = 5
 Time = [None] * (NumPoints + 1)
 Magnitude = [None] * (NumPoints + 1)
 base = [None] * 3
-
+base[1] = 'Metric'
+base[2] = 'Imperial'
+        
 Ende = False
 DiConst = 4.7
 EffDiConst = DiConst
@@ -33,15 +34,18 @@ IntImped = 48
 EffImped = 100
 IntProp = 2.5
 DistCap = 0
-TraceWidth = 0.011
 TraceThick = 0.0021
+TraceWidth = 0.011
 TraceHeight = 0.026
 TraceSpacing = 0.089
 TraceThickSigma = 0.001  
 TraceWidthSigma = 0.001
 TraceHeightSigma = 0.001
 DiConstSigma = 0.1
+EmbedHeight = 0.004
+EmbedHeightSigma = 0.001
 Period = 20.0
 SigPlaneSep = 0.004
+SigPlaneSepSigma = 0.001
 NumIterations = 10
-SelOpt = 0
+SoldMask = 'n'

@@ -14,7 +14,7 @@ from beatinc import *
 #	IntInductSigma,IntResMean,IntResSigma: real);
 #procedure LoadParameters
 #procedure menu(NumOpt : integer; Header : str; OptArray : strgarray; var SelOpt : opt);
-
+#procedute StatIterNum;
 
 #****************************************************************************
 def GetParam(question, UnitSel, number) :
@@ -479,6 +479,20 @@ def menu(NumOpt, Header, OptArray):
    return SelOpt
    os.system('cls')
 
-
+#************************************************************************
+def StatIterNum(NumIterations) :
+#************************************************************************           
+        while True:    
+            NumIterations = GetIParam('Enter number of iterations :', NumIterations)
+            if (NumIterations <= 0) or (NumIterations > IterationsMax) :
+                print('\n')
+                print('The number of iterations must be more than 1.')
+                print('If you want to exceed ',IterationsMax,' Iterations,')
+                print('you will have to change the #constant "IterationsMax"')
+                print('in "beatinc.py" and recompile the program.')
+                print('\n')
+                answer = GetResponse('Hit >RETURN< to continue','y')            
+            if (NumIterations > 0) and (NumIterations <= IterationsMax) : break
+        return NumIterations            
 
             
