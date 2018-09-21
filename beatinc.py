@@ -24,7 +24,7 @@ Magnitude = [None] * (NumPoints + 1)
 base = [None] * 3
 base[1] = 'Metric'
 base[2] = 'Imperial'
-        
+    
 Ende = False
 DiConst = 4.7
 EffDiConst = DiConst
@@ -49,3 +49,4 @@ SigPlaneSep = 0.004
 SigPlaneSepSigma = 0.001
 NumIterations = 10
 SoldMask = 'n'
+UnitSys = 1

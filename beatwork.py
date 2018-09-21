@@ -4,9 +4,6 @@
 
 def Crosstalk
 def DistCapAnal
-def MicroStripStatAnal
-def DualStripStatAnal
-def StatAnal
 def SetUnit
 def LadderNetAnal
 

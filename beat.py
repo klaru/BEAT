@@ -42,6 +42,7 @@ from striplineanal import StripLineAnal
 from microstriplineanal import MicroStripAnal
 from dualstriplineanal import DualStripAnal
 from embedmicrostriplineanal import EmbeddedMicroStripAnal
+from setunit import SetUnit
 from statanal import StatAnal
 from beatfourier import FourierValues, FourierAnal
 
@@ -231,7 +232,7 @@ def main ():       # begin Main Program
         elif SelOpt == '11':				
             StatAnal()
         elif SelOpt == '12':			
-            DoesntWork()		# SetUnit
+            SetUnit()
         elif SelOpt == "13":
             DoesntWork()		# LoadParameters
         elif SelOpt == '14':
