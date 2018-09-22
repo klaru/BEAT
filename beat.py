@@ -44,6 +44,7 @@ from dualstriplineanal import DualStripAnal
 from embedmicrostriplineanal import EmbeddedMicroStripAnal
 from setunit import SetUnit
 from statanal import StatAnal
+from distcapanal import DistCapAnal
 from beatfourier import FourierValues, FourierAnal
 
 #****************************************************************************)
@@ -222,7 +223,7 @@ def main ():       # begin Main Program
         elif SelOpt == '6':
             EmbeddedMicroStripAnal()
         elif SelOpt == '7':
-            DoesntWork()		# DistCapAnal
+           DistCapAnal()
         elif SelOpt == '8':
             DoesntWork()		# Crosstalk
         elif SelOpt == '9':						

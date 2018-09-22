@@ -172,4 +172,4 @@ def LoadAdjust(IntCap, DistCap) :
 #propagation delay based on the added load capacitance per unit length 
 
     LoadAdjust = math.sqrt(1 + (DistCap/IntCap))
-
+    return LoadAdjust

@@ -1,5 +1,5 @@
 #! python3
-import os, sys
+import os, sys, msvcrt
 from beatinc import *
 
 #************************************************************************
@@ -32,12 +32,12 @@ def SetUnit():
         UnitChar = 'm'
     elif UnitSys == 2 :
         UnitChar = 'i'
-    print('Metric or Imperial system?  (m or i)  [',UnitChar,']', end='')
+    print('Metric or Imperial system?  (m or i)  [',UnitChar,']')
 
     while True :
-        temp = input()
-        if (temp == 'm') or (temp == 'i') or (temp == '') : break
-    if (temp != '') : UnitChar = temp
+        temp = msvcrt.getch()
+        if (temp == b'm') or (temp == b'i') or (temp == b'\r') : break
+    if (temp != b'\r') : UnitChar = temp
     if UnitChar == 'm' :
         UnitSys = 1
     elif  UnitChar == 'i' : 

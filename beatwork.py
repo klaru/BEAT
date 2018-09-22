@@ -4,7 +4,6 @@
 
 def Crosstalk
 def DistCapAnal
-def SetUnit
 def LadderNetAnal
 
 
@@ -296,50 +295,6 @@ def DistCapAnal
       GetResponse('Another calculation (y/n)? ',Again)
    #end
 #end
-
-#************************************************************************
-def SetUnit
-#                                                                        
-#  This routine enables the user to select whether he wants to enter     
-#  his input data in the metric or in the imperial system of measurement 
-#  #units.                                                                
-#  Added 6/89 , Ulf Schlichtmann                                         
-#************************************************************************
-
-#var
-   UnitChar, temp : char
-
-#begin      SetUnit 
-     os.system('cls')
-     print ('Set the Unit System for your input data')
-     print ('---------------------------------------')
-     print('\n')
-     print ('You may now select whether you want to input your data in ')
-     print ('the Metric or in the Imperial system.')
-     print('\n')
-     print ('Please keep in mind that the data in the library are in ')
-     print ('the Imperial system')
-     print('\n')
-     print ('Currently selected: ',base[UnitSys])
-     print('\n')
-     print('\n')
-     case UnitSys of
-       1 : UnitChar = 'm'
-       2 : UnitChar = 'i'
-     #end
-     write ('Metric or Imperial system?  (m or i)   [',UnitChar,'] ')
-
-     repeat
-      	temp = Readkey
-      until(temp == 'm') OR (temp == 'i') OR (temp == ^M)
-      if (temp != ^M) : UnitChar = temp
-
-
-	case UnitChar of
-       'm' : UnitSys = 1
-       'i' : UnitSys = 2
-     #end
-#end       SetUnit 
 
 
 #**************************************************************************
