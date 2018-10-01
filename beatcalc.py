@@ -120,7 +120,7 @@ def LineCap(TraceThick, TraceWidth, TraceHeight, DiConst, EffDiConst) :
 #end LineCap
 
 #****************************************************************************
-def EvenLineCap(EvenUpCap) :
+def EvenLineCap(TraceWidth, TraceSpacing, UpCap, FringeCap) :
 #                                                                         
 # Calculates the capacitances of a microstrip trace using the model        
 # defined by Schwarzmann in his paper "Microstrip plus equations adds      
@@ -137,11 +137,11 @@ def EvenLineCap(EvenUpCap) :
     EvenCoupConst = 1 / ((TraceWidth / TraceSpacing) + 1)
     EvenUpCap = UpCap * EvenCoupConst
     EvenFringeCap = FringeCap * EvenCoupConst
-    return EvenFringeCap
+    return EvenUpCap, EvenFringeCap
 #end EvenLineCap
 
 #***************************************************************************
-def OddLineCap(OddUpCap, DiConst, EffDiConst) :
+def OddLineCap(TraceThick, TraceWidth, TraceHeight, TraceSpacing, DiConst, EffDiConst) :
 #                                                                          
 # Calculates the capacitances of a microstrip trace using the model        
 # defined by Schwarzmann in his paper "Microstrip plus equations adds      
@@ -159,10 +159,10 @@ def OddLineCap(OddUpCap, DiConst, EffDiConst) :
 
     CommonTerm =DiConst / (SpeedOfLight * ImpedOfFreeSpace)
     OddCoupConst = 1 / ((TraceSpacing / TraceWidth) + 1)
-    OddUpCap = 8/6 * ((CommonTerm * OddCoupConst)/sqrt(DiConst)) * 1e12
-    OddFringeDenom = math.log(4*TraceSpacing * tanh(4*TraceHeight/TraceSpacing) / (pi*TraceThick))
+    OddUpCap = 8/6 * ((CommonTerm * OddCoupConst)/math.sqrt(DiConst)) * 1e12
+    OddFringeDenom = math.log(4*TraceSpacing * math.tanh(4*TraceHeight/TraceSpacing) / (pi*TraceThick))
     OddFringeCap = (CommonTerm*(EffDiConst/DiConst)*pi/OddFringeDenom)*1e12
-    return OddFringeCap
+    return OddUpCap, OddFringeCap
 #end OddLineCap
 
 #***************************************************************************

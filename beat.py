@@ -45,6 +45,9 @@ from embedmicrostriplineanal import EmbeddedMicroStripAnal
 from setunit import SetUnit
 from statanal import StatAnal
 from distcapanal import DistCapAnal
+from crosstalk import CrossTalk
+from laddernetanal import LadderNetAnal
+from loadparameters import LoadParameters 
 from beatfourier import FourierValues, FourierAnal
 
 #****************************************************************************)
@@ -225,17 +228,17 @@ def main ():       # begin Main Program
         elif SelOpt == '7':
            DistCapAnal()
         elif SelOpt == '8':
-            DoesntWork()		# Crosstalk
+            CrossTalk()
         elif SelOpt == '9':						
-            DoesntWork()		# LadderNetAnal
+            LadderNetAnal()
         elif SelOpt == '10':					
-            DoesntWork()		# FourierAnal
+            FourierAnal()
         elif SelOpt == '11':				
             StatAnal()
         elif SelOpt == '12':			
             SetUnit()
         elif SelOpt == "13":
-            DoesntWork()		# LoadParameters
+            LoadParameters()
         elif SelOpt == '14':
             Help()
 
