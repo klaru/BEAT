@@ -1,5 +1,5 @@
 #! python3
-import os, sys, msvcrt
+import os, sys
 from beatinc import *
 
 #************************************************************************

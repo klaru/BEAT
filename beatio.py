@@ -44,11 +44,11 @@ def GetNetInfo():
 #*************************************************************************
 #begin
     global IntImped, IntProp, Resist, TraceLength, TRise
-    IntImped = GetParam('What is the line impedance?',2,IntImped)
-    IntProp = GetParam('What is the propagation delay?',6,IntProp)
-    Resist = GetParam('What is the intrinsic resistance?',10,Resist)
-    TraceLength = GetParam('What is the line length?',1,TraceLength)
-    TRise = GetParam('What is the rise time?',4,TRise)
+    IntImped = GetParam('What is the line impedance?',IntImped)
+    IntProp = GetParam('What is the propagation delay?',IntProp)
+    Resist = GetParam('What is the intrinsic resistance?',Resist)
+    TraceLength = GetParam('What is the line length?',TraceLength)
+    TRise = GetParam('What is the rise time?',TRise)
     return IntImped, IntProp, Resist, TraceLength, TRise
 #end
 
@@ -85,14 +85,14 @@ def GetTraceParam() :
         TraceThick  = TraceThick * 25.4
         TraceWidth  = TraceWidth * 25.4
         TraceHeight = TraceHeight * 25.4
-        TraceThick = GetParam('What is the trace thickness? [mm]  ',1, TraceThick)
-        TraceWidth = GetParam('What is the trace width? [mm]  ',1, TraceWidth)
-        TraceHeight = GetParam('What is the trace height? [mm]  ',1, TraceHeight)
+        TraceThick = GetParam('What is the trace thickness? [mm]  ', TraceThick)
+        TraceWidth = GetParam('What is the trace width? [mm]  ', TraceWidth)
+        TraceHeight = GetParam('What is the trace height? [mm]  ', TraceHeight)
     else :
-        TraceThick = GetParam('What is the trace thickness? [in]  ',1, TraceThick)
-        TraceWidth = GetParam('What is the trace width? [in]  ',1, TraceWidth)
-        TraceHeight = GetParam('What is the trace height? [in]  ',1, TraceHeight)
-    DiConst = GetParam('What is the dielectric constant? ',0, DiConst)
+        TraceThick = GetParam('What is the trace thickness? [in]  ', TraceThick)
+        TraceWidth = GetParam('What is the trace width? [in]  ', TraceWidth)
+        TraceHeight = GetParam('What is the trace height? [in]  ', TraceHeight)
+    DiConst = GetParam('What is the dielectric constant? ', DiConst)
     return TraceThick, TraceWidth, TraceHeight, DiConst
 #end GetTraceParam
 
@@ -109,14 +109,14 @@ def GetTraceStatParam() :
     TraceThickMean = TraceThick
     TraceHeightMean = TraceHeight
     DiConstMean = DiConst
-    TraceThickMean = GetParam('What is the mean trace thickness? ',1, TraceThickMean)
-    TraceThickSigma = GetParam('What is the standard deviation for thickness? ',1, TraceThickSigma)
-    TraceWidthMean = GetParam('What is the mean trace width? ',1, TraceWidthMean)
-    TraceWidthSigma = GetParam('What is the standard deviation for width? ',1, TraceWidthSigma)
-    TraceHeightMean = GetParam('What is the mean trace height? ',1, TraceHeightMean)
-    TraceHeightSigma = GetParam('What is the standard deviation for height? ',1, TraceHeightSigma)
-    DiConstMean = GetParam('What is the mean dielectric constant? ',0, DiConstMean)
-    DiConstSigma = GetParam('What is the standard deviation for DiConst? ',0, DiConstSigma)
+    TraceThickMean = GetParam('What is the mean trace thickness? ', TraceThickMean)
+    TraceThickSigma = GetParam('What is the standard deviation for thickness? ', TraceThickSigma)
+    TraceWidthMean = GetParam('What is the mean trace width? ', TraceWidthMean)
+    TraceWidthSigma = GetParam('What is the standard deviation for width? ', TraceWidthSigma)
+    TraceHeightMean = GetParam('What is the mean trace height? ', TraceHeightMean)
+    TraceHeightSigma = GetParam('What is the standard deviation for height? ', TraceHeightSigma)
+    DiConstMean = GetParam('What is the mean dielectric constant? ', DiConstMean)
+    DiConstSigma = GetParam('What is the standard deviation for DiConst? ', DiConstSigma)
     TraceThick = TraceThickMean  # Keep the entered values as defaults
     TraceWidth = TraceWidthMean
     TraceHeight = TraceHeightMean

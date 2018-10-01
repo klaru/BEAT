@@ -17,8 +17,8 @@ def LoadParameters() :
 #***************************************************************************
 
 #const
-    LibStringLength = 70  # no database entry may exceed 70 characters 
-    LayerTypeLength = 10  # keyword for layer type : 10 chars max 
+#    LibStringLength = 70   no database entry may exceed 70 characters 
+#    LayerTypeLength = 10   keyword for layer type : 10 chars max 
                           # Note: if this parameter is changed, the
                           #         comparisons between LayerType and some
                           #         string constants below will have to be
