@@ -19,7 +19,7 @@ def Reflectcoef() :
         LineImp = GetParam('Line impedance ? ',LineImp)
         LoadImp = GetParam('Load impedance ? ',LoadImp)
         ReflectionCoef = (LoadImp - LineImp)/(LoadImp + LineImp)
-        print('Reflection coeffiecient = ', ReflectionCoef)						#ReflectionCoef:1:2
+        print('Reflection coeffiecient = ', '%1.2f' %(ReflectionCoef))						#ReflectionCoef:1:2
         print('\n')
         Again = GetResponse('Another reflection calculation (y/n)?', 'y')
         if (Again == False) : break

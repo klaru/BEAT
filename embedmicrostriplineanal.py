@@ -28,7 +28,7 @@ def EmbeddedMicroStripAnal():
         print('-----------------------------------------------------------')
         print('\n')
         TraceThick, TraceWidth, TraceHeight, DiConst = GetTraceParam()   
-        EmbedHeight = GetParam('What is the dielectrical height above the bottom of the trace? ',1, EmbedHeight)
+        EmbedHeight = GetParam('What is the dielectrical height above the bottom of the trace? ', EmbedHeight)
         EffDiConst = DiConst
         LowCap, UpCap, FringeCap = LineCap(TraceThick, TraceWidth, TraceHeight, DiConst, EffDiConst)
         IntProp = PropConst(LowCap, UpCap, UpCap, FringeCap, FringeCap, DiConst, EffDiConst)
@@ -80,8 +80,8 @@ def EmbedMicroStripStatAnal():
         TraceThickMean, TraceThickSigma, TraceWidthMean, TraceWidthSigma,  \
         TraceHeightMean, TraceHeightSigma, DiConstMean, DiConstSigma = GetTraceStatParam()
         EmbedHeightMean = EmbedHeight  # Get default value 
-        EmbedHeightMean = GetParam('What is the dielectrical height above the bottom of the trace? ',1, EmbedHeightMean)
-        EmbedHeightSigma = GetParam('What is the standard deviation for dielectric height above? ',1, EmbedHeightSigma)
+        EmbedHeightMean = GetParam('What is the dielectrical height above the bottom of the trace? ', EmbedHeightMean)
+        EmbedHeightSigma = GetParam('What is the standard deviation for dielectric height above? ', EmbedHeightSigma)
         EmbedHeight = EmbedHeightMean  # Keep as default value 
         
         TraceThickVal = TraceThick

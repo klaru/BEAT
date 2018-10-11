@@ -28,7 +28,7 @@ def DualStripAnal():
         print ('-----------------------------------------------------------')
         print('\n')
         TraceThick, TraceWidth, TraceHeight, DiConst = GetTraceParam()        
-        SigPlaneSep = GetParam('What is the signal plane separation? ',1,SigPlaneSep)
+        SigPlaneSep = GetParam('What is the signal plane separation? ',SigPlaneSep)
         ImpFactor1 = 80/math.sqrt(DiConst)
         ImpFactor2 = math.log(1.9*(2*TraceHeight + TraceThick)/(0.8*TraceWidth + TraceThick))
         ImpFactor3 = 1 - (TraceHeight/(4*(TraceHeight + SigPlaneSep + TraceThick)))
@@ -76,8 +76,8 @@ def DualStripStatAnal():
         TraceThickMean, TraceThickSigma, TraceWidthMean, TraceWidthSigma,  \
         TraceHeightMean, TraceHeightSigma, DiConstMean, DiConstSigma = GetTraceStatParam()
         SigPlaneSepMean = SigPlaneSep  # Get default value 
-        SigPlaneSepMean = GetParam('What is the mean signal plane separation? ',1,SigPlaneSepMean)
-        SigPlaneSepSigma = GetParam('What is the standard deviation? ',1,SigPlaneSepSigma)
+        SigPlaneSepMean = GetParam('What is the mean signal plane separation? ',SigPlaneSepMean)
+        SigPlaneSepSigma = GetParam('What is the standard deviation? ',SigPlaneSepSigma)
         SigPlaneSep = SigPlaneSepMean  # Keep as default value 
         print('\n')
         print('Working')
