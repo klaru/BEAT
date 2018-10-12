@@ -26,7 +26,6 @@ base = [None] * 3
 base[1] = 'Metric'
 base[2] = 'Imperial'
     
-Ende = False
 DiConst = 4.7
 EffDiConst = DiConst
 LoadImp = 100.0
