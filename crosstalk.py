@@ -88,12 +88,12 @@ def CrossTalk():
             #end
         #end
         # Request data essential for crosstalk analysis 
-        TraceSpacing = GetParam('Trace spacing from edge to edge ?',1, TraceSpacing)
-        TraceLength = GetParam('Trace length ?',1, TraceLength)
-        DistCap = GetParam('What is the distributed cap.?',3, DistCap)
-        RiseTime = GetParam('Signal Rise time ?',4, RiseTime)
-        VoltStep = GetParam('Voltage step ?',5, VoltStep)
-        LoadImp = GetParam('What is the load impedance ? ',2, LoadImp)
+        TraceSpacing = GetParam('Trace spacing from edge to edge ?', TraceSpacing)
+        TraceLength = GetParam('Trace length ?', TraceLength)
+        DistCap = GetParam('What is the distributed cap.?', DistCap)
+        RiseTime = GetParam('Signal Rise time ?', RiseTime)
+        VoltStep = GetParam('Voltage step ?', VoltStep)
+        LoadImp = GetParam('What is the load impedance ? ', LoadImp)
         IntGnd = GetResponse('Interlaced grounds (y/n)? ', 'n')
         BusStruct = GetResponse('Bus Structure (y/n)? ', 'n')
         # For a bus structure 
