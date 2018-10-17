@@ -47,7 +47,7 @@ def CrossTalk():
 #   Update,
 #   Again,IntGnd : boolean
 #   SoldMask : char
-    global DiConst, TraceSpacing, DistCap, LoadImp, EvenLineImp, OddLineImp, EvenIntProp, OddIntProp
+    global DiConst, TraceThick, TraceWidth, TraceHeight, TraceSpacing, DistCap, LoadImp, EvenLineImp, OddLineImp, EvenIntProp, OddIntProp
 #begin
     Again = True
     VoltStep = 3.0               #v
@@ -215,7 +215,7 @@ def CrossTalk():
         print('Even Prop Const:                %4.3f' %(EvenIntProp),' ns/ft')
         print('Odd Prop Const:                 %4.3f' %(OddIntProp),' ns/ft')
         print('\n')
-        GetResponse('Another crosstalk analysis? (y/n) ','y')
+        Again = GetResponse('Another crosstalk analysis? (y/n) ','y')
         if Again == False : break
    #end
 #end  Crosstalk 
