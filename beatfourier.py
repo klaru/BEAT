@@ -58,8 +58,8 @@ def FourierValues():
     print('------------------------------')
     print('Period(ns) ', Period)
     print('\n')
-    print('| Point | Time(ns)| Magnitude |')
-    print('------------------------------')
+    print('| Point  | Time(ns)| Magnitude  |')
+    print('---------------------------------')
     for X in range(1, NumPoints + 1) :
         print('|%6d' %(X),' |%7d' %(Time[X]), ' |%10d' %(Magnitude[X]),' |')			#X:6 Time[X]:7 Magnitude[X]:10
     print('\n')
@@ -84,8 +84,8 @@ def FourierAnal():
         print('-----------------------------------------------------------')
         Cmag, Cphase = FourierValues()
         print('\n')
-        print('| Harmonic | C_Mag     | C_Phase    |')
-        print('-------------------------------------')
+        print('| Harmonic  | C_Mag      | C_Phase    |')
+        print('---------------------------------------')
         lineout = str(NumHarmonics) + str(Period)
         FourierCoefDat.write(lineout)
         for K in range(NumHarmonics + 1) :
@@ -93,6 +93,7 @@ def FourierAnal():
             lineout = str(K) + str(Cmag[K]) + str(Cphase[K])
             FourierCoefDat.write(lineout)
         #end for
+        print('\n')
         print('(Coefficient data written to file "FourierCoefDat".)')
         print('\n')
         FourierCoefDat.close()
