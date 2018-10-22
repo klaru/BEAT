@@ -1,13 +1,10 @@
 #! python3
 import os, sys, math
 from beatinc import *
-from beatio import *
 
 #procedure cmult(var c:complex;a,b:complex);
 #procedure cdivide(var c:complex;a,b:complex);
 #procedure cpolar(var magnitude,phase:real;a:complex);
-#procedure FourierValues(var Cmag, Cphase:extendedvector);
-#procedure FourierAnal;
 
 
 # Complex multiply : c=ab 

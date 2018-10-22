@@ -34,37 +34,26 @@
 #*****************************************************************************
 
 import os, sys
-from tkinter import *
-
 from beatinc import *
+from beatio import *
 from beatcalc import *
+from help import Help
+from reflectcoef import Reflectcoef
+from striplineanal import StripLineAnal
+from microstriplineanal import MicroStripAnal
+from dualstriplineanal import DualStripAnal
+from embedmicrostriplineanal import EmbeddedMicroStripAnal
+from setunit import SetUnit
+from statanal import StatAnal
+from distcapanal import DistCapAnal
+from crosstalk import CrossTalk
+from laddernetanal import LadderNetAnal
+from loadparameters import LoadParameters 
+from beatfourier import FourierValues, FourierAnal
 
-from winbeatio import *
-from winreflectcoef import Reflectcoef
-from winstriplineanal import StripLineAnal
-from winmicrostriplineanal import MicroStripAnal
-from windualstriplineanal import DualStripAnal
-from winembedmicrostriplineanal import EmbeddedMicroStripAnal
-from winsetunit import SetUnit
-from winstatanal import StatAnal
-from windistcapanal import DistCapAnal
-from wincrosstalk import CrossTalk
-from winladdernetanal import LadderNetAnal
-from winloadparameters import LoadParameters 
-from winfourier import FourierValues, FourierAnal
-from winhelp import Help
-from main import main
-   
-if __name__ == '__main__':
-    if len(sys.argv) > 1 : 
-        main()
-        sys.exit(0)
-        
-    winbeat = Tk()
-    winbeat.title('                                                                      Windows BEAT')  
-    text = Text(winbeat, bg = 'khaki')
-       
-#################################################################################
+
+def main ():       # begin Main Program
+
     Time[1] =  0.0
     Magnitude[1] = 0.0
    
@@ -130,9 +119,9 @@ if __name__ == '__main__':
     UnitConversion[2][10] = 1
 
     NumIterations = IterationsMax  # Default for Iterations for Stat. Anal.
-		
+						
 # Setup the main menu for BEAT and go to selected routine
-    while True : # begin   
+    while True : # begin
         Header = 'Electrical Analysis - Main Menu - BEAT (Rev 4.0)'
         OptArray[1] = 'Exit'
         OptArray[2] = 'Reflection Analysis'
@@ -148,49 +137,37 @@ if __name__ == '__main__':
         OptArray[12] = 'Metric / Imperial System'
         OptArray[13] = 'Load Library Parameters'
         OptArray[14] = 'Help'
-        menu (14, Header, OptArray, text)
-
-        SelOpt = gui_input(200, 'Enter Selection', 0)
-        
+        SelOpt = menu (14, Header, OptArray)
+		
         if SelOpt == '1':
-	        winbeat.destroy()
+	        break
         elif SelOpt == '2':
-            Reflectcoef(text)
-            clear_textwindow(text)
+            Reflectcoef()
         elif SelOpt == '3':
-            StripLineAnal(text)
-            clear_textwindow(text)
+	        StripLineAnal()
         elif SelOpt == '4':
-            MicroStripAnal(text)
-            clear_textwindow(text)
+            MicroStripAnal()									
         elif SelOpt == '5':
-            DualStripAnal(text)
-            clear_textwindow(text)           
+            DualStripAnal()
         elif SelOpt == '6':
-            EmbeddedMicroStripAnal(text)
-            clear_textwindow(text)            
+            EmbeddedMicroStripAnal()
         elif SelOpt == '7':
-            DistCapAnal(text)
-            clear_textwindow(text)
+           DistCapAnal()
         elif SelOpt == '8':
-            CrossTalk(text)
-            clear_textwindow(text)
+            CrossTalk()
         elif SelOpt == '9':						
-            LadderNetAnal(text)
-            clear_textwindow(text)
+            LadderNetAnal()
         elif SelOpt == '10':					
-            FourierAnal(text)
-            clear_textwindow(text)
+            FourierAnal()
         elif SelOpt == '11':				
-            StatAnal(text)
-            clear_textwindow(text)
+            StatAnal()
         elif SelOpt == '12':			
-            SetUnit(text)
-        elif SelOpt == '13':
-            LoadParameters(text)
-            clear_textwindow(text)
+            SetUnit()
+        elif SelOpt == "13":
+            LoadParameters()
         elif SelOpt == '14':
-            Help(text)
-            clear_textwindow(text)
-            
-    winbeat.mainloop()
+            Help()
+
+if __name__ == '__main__': main ()	
+
+
