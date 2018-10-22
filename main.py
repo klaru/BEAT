@@ -122,7 +122,7 @@ def main ():       # begin Main Program
 						
 # Setup the main menu for BEAT and go to selected routine
     while True : # begin
-        Header = 'Electrical Analysis - Main Menu - BEAT (Rev 4.0)'
+        Header = 'Electrical Analysis - Main Menu - BEAT (Rev 4.1)'
         OptArray[1] = 'Exit'
         OptArray[2] = 'Reflection Analysis'
         OptArray[3] = 'Strip Line Analysis'

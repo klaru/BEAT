@@ -19,7 +19,7 @@ def Help():
         
 # Reset selected help file and display the file
     while True : # begin
-        Header = 'Electrical Analysis - Help Menu - BEAT (Rev 4.0)'
+        Header = 'Electrical Analysis - Help Menu - BEAT (Rev 4.1)'
         OptArray[1] = 'Return to Main Menu'
         OptArray[2] = 'Reflection Analysis'
         OptArray[3] = 'Strip Line Analysis'

@@ -41,7 +41,7 @@ def Help(text):
         print_help('library.hlp')		# LoadParameters
 	
     root = Toplevel()
-    root.title('Electrical Analysis - Help Menu - BEAT (Rev 4.0)')
+    root.title('Electrical Analysis - Help Menu - BEAT (Rev 4.1)')
     w = 450 # width for the Tk root
     h = 300 # height for the Tk root
 
